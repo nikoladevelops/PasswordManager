@@ -16,5 +16,21 @@ namespace PasswordManager
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                var newButton = new CustomButton(new Bitmap("img2.png"));
+                passwordsPanel.Controls.Add(newButton);
+            }
+
+            //foreach (var control in passwordsPanel.Controls)
+            //{
+            //    var btn = control as Button;
+            //    btn.Size = new Size(140, 140);
+            //}
+        }
+
     }
 }
