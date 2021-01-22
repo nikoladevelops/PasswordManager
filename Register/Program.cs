@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PasswordManager
+namespace Register
 {
     static class Program
     {
@@ -16,7 +16,7 @@ namespace PasswordManager
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PasswordManagerForm());
+            Application.Run(new SignUpForm());
         }
     }
 }
