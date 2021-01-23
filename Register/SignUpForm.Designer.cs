@@ -31,9 +31,9 @@ namespace Register
         {
             this.signUpButton = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.signInButton = new System.Windows.Forms.Button();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.emailTextBox = new System.Windows.Forms.TextBox();
-            this.signInButton = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,6 +48,7 @@ namespace Register
             this.signUpButton.TabStop = false;
             this.signUpButton.Text = "Sign Up";
             this.signUpButton.UseVisualStyleBackColor = true;
+            this.signUpButton.Click += new System.EventHandler(this.signUpButton_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -60,6 +61,18 @@ namespace Register
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(331, 280);
             this.flowLayoutPanel1.TabIndex = 4;
+            // 
+            // signInButton
+            // 
+            this.signInButton.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.signInButton.Location = new System.Drawing.Point(3, 235);
+            this.signInButton.Name = "signInButton";
+            this.signInButton.Size = new System.Drawing.Size(323, 42);
+            this.signInButton.TabIndex = 4;
+            this.signInButton.TabStop = false;
+            this.signInButton.Text = "Sign In Instead";
+            this.signInButton.UseVisualStyleBackColor = true;
+            this.signInButton.Click += new System.EventHandler(this.signInButton_Click);
             // 
             // passwordTextBox
             // 
@@ -88,17 +101,6 @@ namespace Register
             this.emailTextBox.Text = "Email";
             this.emailTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.emailTextBox.Click += new System.EventHandler(this.onFirstTimeClicked);
-            // 
-            // signInButton
-            // 
-            this.signInButton.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.signInButton.Location = new System.Drawing.Point(3, 235);
-            this.signInButton.Name = "signInButton";
-            this.signInButton.Size = new System.Drawing.Size(323, 42);
-            this.signInButton.TabIndex = 4;
-            this.signInButton.TabStop = false;
-            this.signInButton.Text = "Sign In Instead";
-            this.signInButton.UseVisualStyleBackColor = true;
             // 
             // SignUpForm
             // 
