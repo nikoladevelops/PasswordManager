@@ -13,19 +13,17 @@ namespace Register
 {
     public partial class SignUpForm : Form
     {
+        private List<AccountModel> accounts = new List<AccountModel>();
         private bool isSigningUp = true;
 
         public SignUpForm()
         {
             InitializeComponent();
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (!File.Exists("important.info")) 
-            {
-                File.Create("important.info");
-            }
         }
 
         private void onFirstTimeClicked(object sender, EventArgs e)
@@ -54,33 +52,33 @@ namespace Register
 
         private void signUpButton_Click(object sender, EventArgs e)
         {
+
+            //TODO - MAKE A USERNAME TEXBOX THAT WILL BE UNIQUE AND PUBLIC
+
+
+            AccountModel account =new AccountModel();
+            var email = emailTextBox.Text;
+            var password = passwordTextBox.Text;
+
             if (isSigningUp)
             {
-                var email = emailTextBox.Text;
-                var password = passwordTextBox.Text;
-
-                var encryptedEmail = StringCipher.Encrypt(email, email);
-                var encryptedPassword = StringCipher.Encrypt(password, password);
-
-                //using (var writer = new StreamWriter("important.info"))
-                //{
-                //    writer.WriteLine(encryptedEmail);
-                //    writer.WriteLine(encryptedPassword);
-                //}
-
-                using (var reader = new StreamReader("important.info"))
+                account.Email = StringCipher.Encrypt(email, email);
+                account.Password = StringCipher.Encrypt(password, password);
+                SqliteDataAccess.SaveAccount(account);
+            }
+            else 
+            {
+                var foundAccount = SqliteDataAccess.LoadAccount(email, password);
+                if (foundAccount != null)
                 {
-                    var encEmail = reader.ReadLine();
-                    var encPass = reader.ReadLine();
+                    emailTextBox.Text = foundAccount.Password;
+                    passwordTextBox.Text = foundAccount.Email;
 
-                    var decryptedEmail = StringCipher.Decrypt(encEmail, email);
-                    var decryptedPassword = StringCipher.Decrypt(encPass, password);
-
-                    emailTextBox.Text = decryptedPassword;
-                    passwordTextBox.Text = decryptedEmail;
                 }
-
-
+                else
+                {
+                    emailTextBox.Text = "Errorrr";
+                }
             }
         }
     }
