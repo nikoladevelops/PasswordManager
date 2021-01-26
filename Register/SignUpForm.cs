@@ -1,20 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
-using System.Threading;
+using PasswordManager;
+using DatabaseModels;
 
 namespace Register
 {
     public partial class SignUpForm : Form
     {
-        private List<AccountModel> accounts = new List<AccountModel>();
         private List<TextBox> textBoxes = new List<TextBox>();
         private bool isSigningUp = true;
 
@@ -82,7 +75,7 @@ namespace Register
             var username = usernameTextBox.Text;
             var password = passwordTextBox.Text;
 
-            AccountModel account =new AccountModel();
+            var account =new AccountModel();
             if (isSigningUp)
             {
                 var email = emailTextBox.Text;
@@ -106,8 +99,13 @@ namespace Register
                     // TODO LOAD PASSWORD MANAGER WITH ACCOUNT ITEMS
                     emailTextBox.Text = foundAccount.Password;
                     passwordTextBox.Text = foundAccount.Email;
-                    
-                    var newForm = new PasswordManager.PasswordManagerForm();
+
+                    var accountItems = SqliteDataAccess.LoadAccountItems(foundAccount);
+                    foreach (var item in accountItems)
+                    {
+
+                    }
+                    var newForm = new PasswordManagerForm(new List<AccountItemModel>());
                     this.Visible = false;
                     newForm.ShowDialog();
                     this.Close();

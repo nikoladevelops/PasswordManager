@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Register
+namespace DatabaseModels
 {
-    public class AccountItemsModel
+    public class AccountItemModel
     {
         public int Id { get; set; }
         public byte[] Image { get; set; }

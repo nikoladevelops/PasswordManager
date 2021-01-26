@@ -7,17 +7,17 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using DatabaseModels;
 namespace Register
 {
     public class SqliteDataAccess
     {
-        public static List<AccountItemsModel> LoadAccountItems(AccountModel account) 
+        public static List<AccountItemModel> LoadAccountItems(AccountModel account) 
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<AccountItemsModel>($"select * from AccountItems where AccountId == {account.Id}", new DynamicParameters());
-                return output.ToList();
+                var output = cnn.Query<AccountItemModel>($"select * from AccountItems where AccountId=='{account.Id}'", new DynamicParameters()).ToList();
+                return output;
             }
         }
         public static AccountModel LoadAccount (string username, string password)
@@ -45,7 +45,7 @@ namespace Register
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-              
+              // TODO check if account already exists!
                 cnn.Execute("insert into Accounts (Username,Email,Password) values (@Username,@Email,@Password)", account);
             }
         }
