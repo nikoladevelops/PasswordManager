@@ -20,28 +20,24 @@ namespace Register
                 return output.ToList();
             }
         }
-        public static AccountModel LoadAccount (string email, string password)
+        public static AccountModel LoadAccount (string username, string password)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var accounts = cnn.Query<AccountModel>($"select * from Accounts", new DynamicParameters())
-                    .ToList();
+                var account = cnn.Query<AccountModel>($"select * from Accounts WHERE Username=='{username}'", new DynamicParameters()).ToList().FirstOrDefault();
+                
 
-               
-                foreach (var account in accounts)
+                try
                 {
-                    try
-                    {
-                        var decryptedEmail = StringCipher.Decrypt(account.Email, email);
-                        var decryptedPassword = StringCipher.Decrypt(account.Password, password);
-                        return account;
-                    }
-                    catch (Exception)
-                    {
-                        continue;
-                    }
+                    var decryptedEmail = StringCipher.Decrypt(account.Email, password);
+                    var decryptedPassword = StringCipher.Decrypt(account.Password, password);
                 }
-                return null;
+                catch (Exception)
+                {
+                    throw new ArgumentException("Invalid Username or Password");
+                }
+                return account;
+                
             }
         }
 
@@ -50,7 +46,7 @@ namespace Register
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
               
-                cnn.Execute("insert into Accounts (Email, Password) values (@Email, @Password)", account);
+                cnn.Execute("insert into Accounts (Username,Email,Password) values (@Username,@Email,@Password)", account);
             }
         }
 

@@ -55,8 +55,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountItemsModel.cs" />
-    <Compile Include="AccountModel.cs" />
     <Compile Include="SignUpForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +93,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Database\DatabaseModels.csproj">
+      <Project>{15987533-2756-46b1-9927-b2ed3bc85923}</Project>
+      <Name>DatabaseModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PasswordManager\PasswordManager.csproj">
+      <Project>{c4326c20-09de-4114-a3eb-e5f454d3aa6d}</Project>
+      <Name>PasswordManager</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
