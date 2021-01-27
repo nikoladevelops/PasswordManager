@@ -32,16 +32,17 @@ namespace PasswordManager
             this.passwordsPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.selectImageDialog = new System.Windows.Forms.OpenFileDialog();
             this.settingsButton = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.passwordTextBox = new System.Windows.Forms.TextBox();
+            this.repeatPasswordTextBox = new System.Windows.Forms.TextBox();
+            this.newPasswordButton = new System.Windows.Forms.Button();
+            this.deletePasswordButton = new System.Windows.Forms.Button();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.deleteAccountForeverButton = new System.Windows.Forms.Button();
+            this.creditsButton = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.button7 = new System.Windows.Forms.Button();
+            this.browseImageButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // passwordsPanel
@@ -61,6 +62,7 @@ namespace PasswordManager
             // 
             // settingsButton
             // 
+            this.settingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.settingsButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.settingsButton.Location = new System.Drawing.Point(-1, -1);
             this.settingsButton.Name = "settingsButton";
@@ -71,146 +73,164 @@ namespace PasswordManager
             this.settingsButton.UseVisualStyleBackColor = true;
             this.settingsButton.Click += new System.EventHandler(this.settings_Click);
             // 
-            // textBox1
+            // passwordTextBox
             // 
-            this.textBox1.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(247, 10);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(124, 27);
-            this.textBox1.TabIndex = 4;
-            this.textBox1.TabStop = false;
-            this.textBox1.Text = "Password";
-            this.textBox1.Visible = false;
+            this.passwordTextBox.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passwordTextBox.Location = new System.Drawing.Point(247, 10);
+            this.passwordTextBox.Name = "passwordTextBox";
+            this.passwordTextBox.Size = new System.Drawing.Size(124, 27);
+            this.passwordTextBox.TabIndex = 4;
+            this.passwordTextBox.TabStop = false;
+            this.passwordTextBox.Text = "Password";
+            this.passwordTextBox.Visible = false;
             // 
-            // button1
+            // repeatPasswordTextBox
             // 
-            this.button1.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(498, 10);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(105, 28);
-            this.button1.TabIndex = 5;
-            this.button1.TabStop = false;
-            this.button1.Text = "Browse Image";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
+            this.repeatPasswordTextBox.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.repeatPasswordTextBox.Location = new System.Drawing.Point(373, 10);
+            this.repeatPasswordTextBox.Name = "repeatPasswordTextBox";
+            this.repeatPasswordTextBox.Size = new System.Drawing.Size(124, 27);
+            this.repeatPasswordTextBox.TabIndex = 6;
+            this.repeatPasswordTextBox.TabStop = false;
+            this.repeatPasswordTextBox.Text = "Repeat Password";
+            this.repeatPasswordTextBox.Visible = false;
             // 
-            // textBox2
+            // newPasswordButton
             // 
-            this.textBox2.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(373, 10);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(124, 27);
-            this.textBox2.TabIndex = 6;
-            this.textBox2.TabStop = false;
-            this.textBox2.Text = "Repeat Password";
-            this.textBox2.Visible = false;
+            this.newPasswordButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.newPasswordButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.newPasswordButton.Location = new System.Drawing.Point(-1, 22);
+            this.newPasswordButton.Name = "newPasswordButton";
+            this.newPasswordButton.Size = new System.Drawing.Size(169, 24);
+            this.newPasswordButton.TabIndex = 7;
+            this.newPasswordButton.TabStop = false;
+            this.newPasswordButton.Text = "New Password";
+            this.newPasswordButton.UseVisualStyleBackColor = true;
+            this.newPasswordButton.Visible = false;
             // 
-            // button2
+            // deletePasswordButton
             // 
-            this.button2.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(-1, 22);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(169, 24);
-            this.button2.TabIndex = 7;
-            this.button2.TabStop = false;
-            this.button2.Text = "New Password";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Visible = false;
+            this.deletePasswordButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.deletePasswordButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deletePasswordButton.Location = new System.Drawing.Point(-1, 45);
+            this.deletePasswordButton.Name = "deletePasswordButton";
+            this.deletePasswordButton.Size = new System.Drawing.Size(169, 24);
+            this.deletePasswordButton.TabIndex = 8;
+            this.deletePasswordButton.TabStop = false;
+            this.deletePasswordButton.Text = "Delete Password";
+            this.deletePasswordButton.UseVisualStyleBackColor = true;
+            this.deletePasswordButton.Visible = false;
             // 
-            // button3
+            // saveButton
             // 
-            this.button3.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(-1, 45);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(169, 24);
-            this.button3.TabIndex = 8;
-            this.button3.TabStop = false;
-            this.button3.Text = "Delete Password";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Visible = false;
+            this.saveButton.BackColor = System.Drawing.Color.LimeGreen;
+            this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveButton.Location = new System.Drawing.Point(604, 10);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(62, 28);
+            this.saveButton.TabIndex = 9;
+            this.saveButton.TabStop = false;
+            this.saveButton.Text = "Save";
+            this.saveButton.UseVisualStyleBackColor = false;
+            this.saveButton.Visible = false;
             // 
-            // button4
+            // cancelButton
             // 
-            this.button4.BackColor = System.Drawing.Color.LimeGreen;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(603, 10);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(62, 28);
-            this.button4.TabIndex = 9;
-            this.button4.TabStop = false;
-            this.button4.Text = "Save";
-            this.button4.UseVisualStyleBackColor = false;
-            this.button4.Visible = false;
+            this.cancelButton.BackColor = System.Drawing.Color.Firebrick;
+            this.cancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cancelButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cancelButton.Location = new System.Drawing.Point(667, 10);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(62, 28);
+            this.cancelButton.TabIndex = 10;
+            this.cancelButton.TabStop = false;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = false;
+            this.cancelButton.Visible = false;
             // 
-            // button5
+            // deleteAccountForeverButton
             // 
-            this.button5.BackColor = System.Drawing.Color.Firebrick;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.Location = new System.Drawing.Point(666, 10);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(62, 28);
-            this.button5.TabIndex = 10;
-            this.button5.TabStop = false;
-            this.button5.Text = "Cancel";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Visible = false;
+            this.deleteAccountForeverButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.deleteAccountForeverButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deleteAccountForeverButton.Location = new System.Drawing.Point(0, 68);
+            this.deleteAccountForeverButton.Name = "deleteAccountForeverButton";
+            this.deleteAccountForeverButton.Size = new System.Drawing.Size(168, 24);
+            this.deleteAccountForeverButton.TabIndex = 11;
+            this.deleteAccountForeverButton.TabStop = false;
+            this.deleteAccountForeverButton.Text = "DELETE ACCOUNT FOREVER";
+            this.deleteAccountForeverButton.UseVisualStyleBackColor = true;
+            this.deleteAccountForeverButton.Visible = false;
             // 
-            // button6
+            // creditsButton
             // 
-            this.button6.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.Location = new System.Drawing.Point(0, 68);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(168, 24);
-            this.button6.TabIndex = 11;
-            this.button6.TabStop = false;
-            this.button6.Text = "DELETE EVERYTHING FOREVER";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Visible = false;
+            this.creditsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.creditsButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.creditsButton.Location = new System.Drawing.Point(83, -1);
+            this.creditsButton.Name = "creditsButton";
+            this.creditsButton.Size = new System.Drawing.Size(85, 24);
+            this.creditsButton.TabIndex = 13;
+            this.creditsButton.TabStop = false;
+            this.creditsButton.Text = "Credits";
+            this.creditsButton.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Bahnschrift Condensed", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(535, 38);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 13);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "70x70";
+            this.label2.Visible = false;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(764, 23);
+            this.label1.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(341, 53);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(297, 23);
-            this.label1.TabIndex = 12;
+            this.label1.Size = new System.Drawing.Size(248, 19);
+            this.label1.TabIndex = 15;
             this.label1.Text = "CLICK ON THE PASSWORD YOU WISH TO DELETE!";
             this.label1.Visible = false;
             // 
-            // button7
+            // browseImageButton
             // 
-            this.button7.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button7.Location = new System.Drawing.Point(83, -1);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(85, 24);
-            this.button7.TabIndex = 13;
-            this.button7.TabStop = false;
-            this.button7.Text = "Credits";
-            this.button7.UseVisualStyleBackColor = true;
+            this.browseImageButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.browseImageButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.browseImageButton.Location = new System.Drawing.Point(498, 10);
+            this.browseImageButton.Name = "browseImageButton";
+            this.browseImageButton.Size = new System.Drawing.Size(105, 28);
+            this.browseImageButton.TabIndex = 16;
+            this.browseImageButton.TabStop = false;
+            this.browseImageButton.Text = "Browse Image";
+            this.browseImageButton.UseVisualStyleBackColor = true;
+            this.browseImageButton.Visible = false;
             // 
             // PasswordManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button7);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.browseImageButton);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.creditsButton);
+            this.Controls.Add(this.deleteAccountForeverButton);
+            this.Controls.Add(this.cancelButton);
+            this.Controls.Add(this.saveButton);
+            this.Controls.Add(this.deletePasswordButton);
+            this.Controls.Add(this.newPasswordButton);
+            this.Controls.Add(this.repeatPasswordTextBox);
+            this.Controls.Add(this.passwordTextBox);
             this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.passwordsPanel);
             this.Name = "PasswordManagerForm";
             this.Text = "Password Manager";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Click += new System.EventHandler(this.manager_Clicked);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -220,16 +240,17 @@ namespace PasswordManager
         private System.Windows.Forms.FlowLayoutPanel passwordsPanel;
         private System.Windows.Forms.OpenFileDialog selectImageDialog;
         private System.Windows.Forms.Button settingsButton;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.TextBox passwordTextBox;
+        private System.Windows.Forms.TextBox repeatPasswordTextBox;
+        private System.Windows.Forms.Button newPasswordButton;
+        private System.Windows.Forms.Button deletePasswordButton;
+        private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.Button deleteAccountForeverButton;
+        private System.Windows.Forms.Button creditsButton;
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button browseImageButton;
     }
 }
 

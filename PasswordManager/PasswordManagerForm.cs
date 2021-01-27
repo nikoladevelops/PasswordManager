@@ -43,7 +43,16 @@ namespace PasswordManager
 
         private void settings_Click(object sender, EventArgs e)
         {
-            ((Button)sender).Focus();
+            newPasswordButton.Visible = !newPasswordButton.Visible;
+            deletePasswordButton.Visible = !deletePasswordButton.Visible;
+            deleteAccountForeverButton.Visible = !deleteAccountForeverButton.Visible;
+        }
+
+        private void manager_Clicked(object sender, EventArgs e)
+        {
+            newPasswordButton.Visible = false;
+            deletePasswordButton.Visible = false;
+            deleteAccountForeverButton.Visible = false;
         }
     }
 }
