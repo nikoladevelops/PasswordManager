@@ -97,15 +97,8 @@ namespace Register
                 if (foundAccount != null)
                 {
                     // TODO LOAD PASSWORD MANAGER WITH ACCOUNT ITEMS
-                    emailTextBox.Text = foundAccount.Password;
-                    passwordTextBox.Text = foundAccount.Email;
-
                     var accountItems = SqliteDataAccess.LoadAccountItems(foundAccount);
-                    foreach (var item in accountItems)
-                    {
-
-                    }
-                    var newForm = new PasswordManagerForm(new List<AccountItemModel>());
+                    var newForm = new PasswordManagerForm(accountItems);
                     this.Visible = false;
                     newForm.ShowDialog();
                     this.Close();

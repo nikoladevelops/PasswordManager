@@ -8,7 +8,7 @@ namespace PasswordManager
 {
     public partial class PasswordManagerForm : Form
     {
-        private List<AccountItemModel> accountItems;
+        private List<AccountItemModel> accountItems=new List<AccountItemModel>();
         public PasswordManagerForm()
         {
             InitializeComponent();
@@ -25,6 +25,11 @@ namespace PasswordManager
             // ALSO ADD A PASSWORD FIELD IN YOUR AccountItems table!!
             for (int i = 0; i < 10; i++)
             {
+            }
+
+            foreach (var item in accountItems)
+            {
+
                 var newButton = new CustomButton(new Bitmap("img2.png"));
                 passwordsPanel.Controls.Add(newButton);
             }
@@ -36,5 +41,9 @@ namespace PasswordManager
             //}
         }
 
+        private void settings_Click(object sender, EventArgs e)
+        {
+            ((Button)sender).Focus();
+        }
     }
 }
