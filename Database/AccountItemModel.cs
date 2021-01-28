@@ -9,6 +9,7 @@ namespace DatabaseModels
     public class AccountItemModel
     {
         public int Id { get; set; }
+        public string Password { get; set; }
         public byte[] Image { get; set; }
         public int AccountId { get; set; }
     }

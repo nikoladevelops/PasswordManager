@@ -30,7 +30,6 @@ namespace PasswordManager
         private void InitializeComponent()
         {
             this.passwordsPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.selectImageDialog = new System.Windows.Forms.OpenFileDialog();
             this.settingsButton = new System.Windows.Forms.Button();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.repeatPasswordTextBox = new System.Windows.Forms.TextBox();
@@ -40,8 +39,8 @@ namespace PasswordManager
             this.cancelButton = new System.Windows.Forms.Button();
             this.deleteAccountForeverButton = new System.Windows.Forms.Button();
             this.creditsButton = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.imageSizeLabel = new System.Windows.Forms.Label();
+            this.deleteLabel = new System.Windows.Forms.Label();
             this.browseImageButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -55,10 +54,7 @@ namespace PasswordManager
             this.passwordsPanel.Name = "passwordsPanel";
             this.passwordsPanel.Size = new System.Drawing.Size(801, 376);
             this.passwordsPanel.TabIndex = 2;
-            // 
-            // selectImageDialog
-            // 
-            this.selectImageDialog.Title = "Select an Image";
+            this.passwordsPanel.Click += new System.EventHandler(this.manager_Clicked);
             // 
             // settingsButton
             // 
@@ -83,6 +79,7 @@ namespace PasswordManager
             this.passwordTextBox.TabStop = false;
             this.passwordTextBox.Text = "Password";
             this.passwordTextBox.Visible = false;
+            this.passwordTextBox.Click += new System.EventHandler(this.onFirstTimeClicked);
             // 
             // repeatPasswordTextBox
             // 
@@ -94,6 +91,7 @@ namespace PasswordManager
             this.repeatPasswordTextBox.TabStop = false;
             this.repeatPasswordTextBox.Text = "Repeat Password";
             this.repeatPasswordTextBox.Visible = false;
+            this.repeatPasswordTextBox.Click += new System.EventHandler(this.onFirstTimeClicked);
             // 
             // newPasswordButton
             // 
@@ -107,6 +105,7 @@ namespace PasswordManager
             this.newPasswordButton.Text = "New Password";
             this.newPasswordButton.UseVisualStyleBackColor = true;
             this.newPasswordButton.Visible = false;
+            this.newPasswordButton.Click += new System.EventHandler(this.newPasswordButton_Click);
             // 
             // deletePasswordButton
             // 
@@ -120,6 +119,7 @@ namespace PasswordManager
             this.deletePasswordButton.Text = "Delete Password";
             this.deletePasswordButton.UseVisualStyleBackColor = true;
             this.deletePasswordButton.Visible = false;
+            this.deletePasswordButton.Click += new System.EventHandler(this.deletePasswordButton_Click);
             // 
             // saveButton
             // 
@@ -148,14 +148,15 @@ namespace PasswordManager
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = false;
             this.cancelButton.Visible = false;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // deleteAccountForeverButton
             // 
             this.deleteAccountForeverButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deleteAccountForeverButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deleteAccountForeverButton.Location = new System.Drawing.Point(0, 68);
+            this.deleteAccountForeverButton.Location = new System.Drawing.Point(-1, 68);
             this.deleteAccountForeverButton.Name = "deleteAccountForeverButton";
-            this.deleteAccountForeverButton.Size = new System.Drawing.Size(168, 24);
+            this.deleteAccountForeverButton.Size = new System.Drawing.Size(169, 24);
             this.deleteAccountForeverButton.TabIndex = 11;
             this.deleteAccountForeverButton.TabStop = false;
             this.deleteAccountForeverButton.Text = "DELETE ACCOUNT FOREVER";
@@ -174,27 +175,27 @@ namespace PasswordManager
             this.creditsButton.Text = "Credits";
             this.creditsButton.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // imageSizeLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Bahnschrift Condensed", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(535, 38);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 13);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "70x70";
-            this.label2.Visible = false;
+            this.imageSizeLabel.AutoSize = true;
+            this.imageSizeLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.imageSizeLabel.Location = new System.Drawing.Point(535, 38);
+            this.imageSizeLabel.Name = "imageSizeLabel";
+            this.imageSizeLabel.Size = new System.Drawing.Size(29, 13);
+            this.imageSizeLabel.TabIndex = 14;
+            this.imageSizeLabel.Text = "70x70";
+            this.imageSizeLabel.Visible = false;
             // 
-            // label1
+            // deleteLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(341, 53);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(248, 19);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "CLICK ON THE PASSWORD YOU WISH TO DELETE!";
-            this.label1.Visible = false;
+            this.deleteLabel.AutoSize = true;
+            this.deleteLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deleteLabel.Location = new System.Drawing.Point(341, 53);
+            this.deleteLabel.Name = "deleteLabel";
+            this.deleteLabel.Size = new System.Drawing.Size(248, 19);
+            this.deleteLabel.TabIndex = 15;
+            this.deleteLabel.Text = "CLICK ON THE PASSWORD YOU WISH TO DELETE!";
+            this.deleteLabel.Visible = false;
             // 
             // browseImageButton
             // 
@@ -208,15 +209,16 @@ namespace PasswordManager
             this.browseImageButton.Text = "Browse Image";
             this.browseImageButton.UseVisualStyleBackColor = true;
             this.browseImageButton.Visible = false;
+            this.browseImageButton.Click += new System.EventHandler(this.browseImageButton_Click);
             // 
             // PasswordManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.deleteLabel);
             this.Controls.Add(this.browseImageButton);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.imageSizeLabel);
             this.Controls.Add(this.creditsButton);
             this.Controls.Add(this.deleteAccountForeverButton);
             this.Controls.Add(this.cancelButton);
@@ -238,7 +240,6 @@ namespace PasswordManager
 
         #endregion
         private System.Windows.Forms.FlowLayoutPanel passwordsPanel;
-        private System.Windows.Forms.OpenFileDialog selectImageDialog;
         private System.Windows.Forms.Button settingsButton;
         private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.TextBox repeatPasswordTextBox;
@@ -248,8 +249,8 @@ namespace PasswordManager
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button deleteAccountForeverButton;
         private System.Windows.Forms.Button creditsButton;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label imageSizeLabel;
+        private System.Windows.Forms.Label deleteLabel;
         private System.Windows.Forms.Button browseImageButton;
     }
 }

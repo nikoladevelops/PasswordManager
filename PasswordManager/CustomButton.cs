@@ -10,7 +10,8 @@ namespace PasswordManager
 {
     public class CustomButton:Button
     {
-        private string data = "254121224";
+        private int id;
+        private string data;
         public CustomButton(Bitmap image)
         {
             this.Click += Clicked;
@@ -20,7 +21,23 @@ namespace PasswordManager
             this.Size = new Size(70, 70);
             this.BackgroundImageLayout = ImageLayout.Zoom;
             this.BackgroundImage = new Bitmap(image);
+            
         }
+
+        public CustomButton(int id, Bitmap image, string data)
+        {
+            this.Click += Clicked;
+            this.FlatStyle = FlatStyle.Flat;
+            this.FlatAppearance.BorderColor = Color.FromArgb(255, 128, 0);
+            this.TabStop = false;
+            this.Size = new Size(70, 70);
+            this.BackgroundImageLayout = ImageLayout.Zoom;
+            this.BackgroundImage = new Bitmap(image);
+            this.data = data;
+            this.id = id;
+            
+        }
+
         public CustomButton(Bitmap image,Size size)
         {
             this.Click += Clicked;
