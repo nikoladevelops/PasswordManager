@@ -41,7 +41,7 @@ namespace PasswordManager
                     image = new Bitmap(ms);
                 }
 
-                var data = item.Password;
+                var data = item.ImagePassword;
 
                 var newButton = new CustomButton(item.Id,image, data);
                 passwordsPanel.Controls.Add(newButton);
@@ -57,7 +57,7 @@ namespace PasswordManager
                 image = new Bitmap(ms);
             }
 
-            var data = item.Password;
+            var data = item.ImagePassword;
 
             var newButton = new CustomButton(item.Id, image, data);
             passwordsPanel.Controls.Add(newButton);
@@ -98,21 +98,9 @@ namespace PasswordManager
             HideSettingsMenu();
         }
 
-        private void cancelButton_Click(object sender, EventArgs e)
-        {
-            openDialogImage = null;
-
-            passwordTextBox.Click += onFirstTimeClicked;
-            repeatPasswordTextBox.Click += onFirstTimeClicked;
-
-            setControlVisibility(!passwordTextBox.Visible, passwordTextBox, repeatPasswordTextBox, browseImageButton, imageSizeLabel, saveButton, cancelButton);
-            
-            passwordTextBox.Text = "Password";
-            repeatPasswordTextBox.Text = "Repeat Password";
-        }
-
         private void deletePasswordButton_Click(object sender, EventArgs e)
         {
+            // TODO 
             HideSettingsMenu();
             deleteLabel.Visible = !deleteLabel.Visible;
         }
@@ -142,12 +130,32 @@ namespace PasswordManager
             }
         }
 
+        private void ButtonsResetDefaultProperties()
+        {
+            openDialogImage = null;
+
+            passwordTextBox.Click += onFirstTimeClicked;
+            repeatPasswordTextBox.Click += onFirstTimeClicked;
+
+            setControlVisibility(!passwordTextBox.Visible, passwordTextBox, repeatPasswordTextBox, browseImageButton, imageSizeLabel, saveButton, cancelButton);
+
+            passwordTextBox.Text = "Password";
+            repeatPasswordTextBox.Text = "Repeat Password";
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            ButtonsResetDefaultProperties();
+        }
+
         private void saveButton_Click(object sender, EventArgs e)
         {
             // TODO Verify password and repeated password
-            SqliteDataAccess.SaveAccountItem(new AccountItemModel() { AccountId = this.account.Id, Image = openDialogImage, Password = passwordTextBox.Text });
+
+            SqliteDataAccess.SaveAccountItem(new AccountItemModel() { AccountId = this.account.Id, Image = openDialogImage, ImagePassword = passwordTextBox.Text });
             VisualizeMostRecentAccountData();
-            openDialogImage = null;
+
+            ButtonsResetDefaultProperties();
         }
     }
 }

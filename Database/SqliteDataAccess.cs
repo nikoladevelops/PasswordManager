@@ -16,7 +16,7 @@ namespace DatabaseModels
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<AccountItemModel>($"SELECT * FROM AccountItems WHERE AccountId =='{account.Id}' ORDER BY Id DESC LIMIT 1;", new DynamicParameters()).ToList().FirstOrDefault();
+                var output = cnn.Query<AccountItemModel>($"SELECT * FROM AccountItems WHERE AccountId =={account.Id} ORDER BY Id DESC LIMIT 1;", new DynamicParameters()).ToList().FirstOrDefault();
                 return output;
             }
         }
@@ -25,7 +25,7 @@ namespace DatabaseModels
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<AccountItemModel>($"select * from AccountItems where AccountId=='{account.Id}'", new DynamicParameters()).ToList();
+                var output = cnn.Query<AccountItemModel>($"select * from AccountItems where AccountId=={account.Id}", new DynamicParameters()).ToList();
                 return output;
             }
         }
@@ -35,7 +35,7 @@ namespace DatabaseModels
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 // TODO check if account already exists!
-                cnn.Execute("insert into AccountItems (Image,Password,AccountId) values (@Image,@Password,@AccountId)", accountItems);
+                cnn.Execute("insert into AccountItems (Image,ImagePassword,AccountId) values (@Image,@ImagePassword,@AccountId)", accountItems);
             }
         }
         public static AccountModel LoadAccount (string username, string password)

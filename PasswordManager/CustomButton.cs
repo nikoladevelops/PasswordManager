@@ -10,10 +10,10 @@ namespace PasswordManager
 {
     public class CustomButton:Button
     {
-        private int id;
         private string data;
+        private int id;
 
-        public CustomButton(int id,Bitmap image, string data)
+        public CustomButton(int id, Bitmap image, string data)
         {
             this.Click += Clicked;
             this.FlatStyle = FlatStyle.Flat;
