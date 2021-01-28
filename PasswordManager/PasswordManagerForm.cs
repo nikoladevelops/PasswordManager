@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
 
@@ -9,25 +10,29 @@ namespace PasswordManager
 {
     public partial class PasswordManagerForm : Form
     {
-        private List<AccountItemModel> accountItems=new List<AccountItemModel>();
+        private AccountModel account;
+        private List<AccountItemModel> accountItems;
+        private byte[] openDialogImage;
 
         public PasswordManagerForm()
         {
             InitializeComponent();
         }
-        public PasswordManagerForm(List<AccountItemModel> accountItems)
+
+        public PasswordManagerForm(AccountModel account)
             :this()
         {
-            this.accountItems = accountItems;
+            this.account = account;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            LoadAccountData();
+            VisualizeAccountData();
         }
-
-        private void LoadAccountData()
+        private void VisualizeAccountData()
         {
+            accountItems = SqliteDataAccess.LoadAllAccountItems(account);
+
             foreach (var item in accountItems)
             {
                 Bitmap image;
@@ -42,14 +47,20 @@ namespace PasswordManager
                 passwordsPanel.Controls.Add(newButton);
             }
         }
-
-        //var image = new Bitmap(10, 10);
-        // Draw your image
-        //byte[] arr = image.ToByteArray(ImageFormat.Bmp);
-
-        private void AddButton(CustomButton button)
+        private void VisualizeMostRecentAccountData()
         {
-            passwordsPanel.Controls.Add(button);
+            var item = SqliteDataAccess.LoadMostRecentAccountItem(account);
+
+            Bitmap image;
+            using (var ms = new MemoryStream(item.Image))
+            {
+                image = new Bitmap(ms);
+            }
+
+            var data = item.Password;
+
+            var newButton = new CustomButton(item.Id, image, data);
+            passwordsPanel.Controls.Add(newButton);
         }
 
         private void onFirstTimeClicked(object sender, EventArgs e)
@@ -89,6 +100,8 @@ namespace PasswordManager
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
+            openDialogImage = null;
+
             passwordTextBox.Click += onFirstTimeClicked;
             repeatPasswordTextBox.Click += onFirstTimeClicked;
 
@@ -114,9 +127,27 @@ namespace PasswordManager
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
                     var image = new Bitmap(dlg.FileName);
-                    AddButton(new CustomButton(image));
+
+                    openDialogImage = BmpToByteArray(image, ImageFormat.Bmp);
                 }
             }
+        }
+
+        public static byte[] BmpToByteArray(Image image, ImageFormat format)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                image.Save(ms, format);
+                return ms.ToArray();
+            }
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            // TODO Verify password and repeated password
+            SqliteDataAccess.SaveAccountItem(new AccountItemModel() { AccountId = this.account.Id, Image = openDialogImage, Password = passwordTextBox.Text });
+            VisualizeMostRecentAccountData();
+            openDialogImage = null;
         }
     }
 }

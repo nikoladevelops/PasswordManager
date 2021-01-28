@@ -8,16 +8,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DatabaseModels;
-namespace Register
+namespace DatabaseModels
 {
     public class SqliteDataAccess
     {
-        public static List<AccountItemModel> LoadAccountItems(AccountModel account) 
+        public static AccountItemModel LoadMostRecentAccountItem(AccountModel account)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<AccountItemModel>($"SELECT * FROM AccountItems WHERE AccountId =='{account.Id}' ORDER BY Id DESC LIMIT 1;", new DynamicParameters()).ToList().FirstOrDefault();
+                return output;
+            }
+        }
+
+        public static List<AccountItemModel> LoadAllAccountItems(AccountModel account) 
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 var output = cnn.Query<AccountItemModel>($"select * from AccountItems where AccountId=='{account.Id}'", new DynamicParameters()).ToList();
                 return output;
+            }
+        }
+
+        public static void SaveAccountItem(AccountItemModel accountItems)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                // TODO check if account already exists!
+                cnn.Execute("insert into AccountItems (Image,Password,AccountId) values (@Image,@Password,@AccountId)", accountItems);
             }
         }
         public static AccountModel LoadAccount (string username, string password)

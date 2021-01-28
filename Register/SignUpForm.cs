@@ -96,9 +96,7 @@ namespace Register
                 var foundAccount = SqliteDataAccess.LoadAccount(username, password);
                 if (foundAccount != null)
                 {
-                    // TODO LOAD PASSWORD MANAGER WITH ACCOUNT ITEMS
-                    var accountItems = SqliteDataAccess.LoadAccountItems(foundAccount);
-                    var newForm = new PasswordManagerForm(accountItems);
+                    var newForm = new PasswordManagerForm(foundAccount);
                     this.Visible = false;
                     newForm.ShowDialog();
                     this.Close();

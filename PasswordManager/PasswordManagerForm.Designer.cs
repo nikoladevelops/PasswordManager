@@ -134,6 +134,7 @@ namespace PasswordManager
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = false;
             this.saveButton.Visible = false;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // cancelButton
             // 
