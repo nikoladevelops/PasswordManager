@@ -13,16 +13,18 @@ namespace PasswordManager
         private AccountModel account;
         private List<AccountItemModel> accountItems;
         private byte[] openDialogImage;
+        private string password;
 
         public PasswordManagerForm()
         {
             InitializeComponent();
         }
 
-        public PasswordManagerForm(AccountModel account)
+        public PasswordManagerForm(AccountModel account,string password)
             :this()
         {
             this.account = account;
+            this.password = password;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -43,7 +45,7 @@ namespace PasswordManager
 
                 var data = item.ImagePassword;
 
-                var newButton = new CustomButton(item.Id,image, data);
+                var newButton = new CustomButton(item.Id, image, data, this.password);
                 passwordsPanel.Controls.Add(newButton);
             }
         }
@@ -59,7 +61,7 @@ namespace PasswordManager
 
             var data = item.ImagePassword;
 
-            var newButton = new CustomButton(item.Id, image, data);
+            var newButton = new CustomButton(item.Id, image, data, this.password);
             passwordsPanel.Controls.Add(newButton);
         }
 
@@ -152,7 +154,8 @@ namespace PasswordManager
         {
             // TODO Verify password and repeated password
 
-            SqliteDataAccess.SaveAccountItem(new AccountItemModel() { AccountId = this.account.Id, Image = openDialogImage, ImagePassword = passwordTextBox.Text });
+            var encryptedPass = StringCipher.Encrypt(passwordTextBox.Text, this.password);
+            SqliteDataAccess.SaveAccountItem(new AccountItemModel() { AccountId = this.account.Id, Image = openDialogImage, ImagePassword = encryptedPass });
             VisualizeMostRecentAccountData();
 
             ButtonsResetDefaultProperties();

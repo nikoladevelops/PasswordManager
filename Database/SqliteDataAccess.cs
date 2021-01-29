@@ -5,9 +5,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SQLite;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DatabaseModels;
+
 namespace DatabaseModels
 {
     public class SqliteDataAccess

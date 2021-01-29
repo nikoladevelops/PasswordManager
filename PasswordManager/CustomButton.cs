@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DatabaseModels;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -10,10 +11,11 @@ namespace PasswordManager
 {
     public class CustomButton:Button
     {
-        private string data;
+        private string encryptedData;
         private int id;
+        private string accountPass;
 
-        public CustomButton(int id, Bitmap image, string data)
+        public CustomButton(int id, Bitmap image, string encryptedData, string accountPass)
         {
             this.Click += Clicked;
             this.FlatStyle = FlatStyle.Flat;
@@ -22,12 +24,14 @@ namespace PasswordManager
             this.Size = new Size(70, 70);
             this.BackgroundImageLayout = ImageLayout.Zoom;
             this.BackgroundImage = new Bitmap(image);
-            this.data = data;
+            this.encryptedData = encryptedData;
             this.id = id;
+            this.accountPass = accountPass;
         }
 
         private void Clicked (object sender, System.EventArgs e)
         {
+            var data = StringCipher.Decrypt(encryptedData, accountPass);
             Clipboard.SetText(data);
         }
     }
