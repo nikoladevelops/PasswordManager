@@ -14,6 +14,8 @@ namespace PasswordManager
         private List<AccountItemModel> accountItems;
         private byte[] openDialogImage;
         private string password;
+        private List<CustomButton> customButtons = new List<CustomButton>();
+        private bool isDeletingACustomButtonNow = false;  // created because of a possible bug
 
         public PasswordManagerForm()
         {
@@ -31,6 +33,7 @@ namespace PasswordManager
         {
             VisualizeAccountData();
         }
+
         private void VisualizeAccountData()
         {
             accountItems = SqliteDataAccess.LoadAllAccountItems(account);
@@ -46,9 +49,13 @@ namespace PasswordManager
                 var data = item.ImagePassword;
 
                 var newButton = new CustomButton(item.Id, image, data, this.password);
+                newButton.Click += CustomButton_Click;
+
+                customButtons.Add(newButton);
                 passwordsPanel.Controls.Add(newButton);
             }
         }
+
         private void VisualizeMostRecentAccountData()
         {
             var item = SqliteDataAccess.LoadMostRecentAccountItem(account);
@@ -62,7 +69,53 @@ namespace PasswordManager
             var data = item.ImagePassword;
 
             var newButton = new CustomButton(item.Id, image, data, this.password);
+            newButton.Click += CustomButton_Click;
+
+            customButtons.Add(newButton);
             passwordsPanel.Controls.Add(newButton);
+        }
+
+        private void CustomButton_Click(object sender, System.EventArgs e)
+        {
+            var buttonThatIsClicked = (CustomButton)sender;
+            var data = StringCipher.Decrypt(buttonThatIsClicked.EncryptedData, buttonThatIsClicked.AccountPassword);
+            Clipboard.SetText(data);
+        }
+
+        private void CustomButton_Click_Delete(object sender, System.EventArgs e)
+        {
+            var buttonThatIsClicked = (CustomButton)sender;
+            this.passwordsPanel.Controls.Remove(buttonThatIsClicked);
+            this.customButtons.Remove(buttonThatIsClicked);
+
+            foreach (var button in customButtons)
+            {
+                button.Click -= CustomButton_Click_Delete;
+                button.Click += CustomButton_Click;
+            }
+
+            deleteLabel.Visible = false;
+            isDeletingACustomButtonNow = false;
+            // TODO remove from database as well
+            SqliteDataAccess.DeleteAccountItem(buttonThatIsClicked.Id);
+        }
+
+        private void deletePasswordButton_Click(object sender, EventArgs e)
+        {
+            HideSettingsMenu();
+
+            if (!isDeletingACustomButtonNow)
+            {
+                deleteLabel.Visible = !deleteLabel.Visible;
+
+                foreach (var button in customButtons)
+                {
+                    button.Click -= CustomButton_Click;
+                    button.Click += CustomButton_Click_Delete;
+                }
+
+                isDeletingACustomButtonNow = true;
+            }
         }
 
         private void onFirstTimeClicked(object sender, EventArgs e)
@@ -79,6 +132,7 @@ namespace PasswordManager
                 control.Visible = setToVisible;
             }
         }
+
         private void HideSettingsMenu() 
         {
             setControlVisibility(false, newPasswordButton, deletePasswordButton, deleteAccountForeverButton);
@@ -98,13 +152,6 @@ namespace PasswordManager
         {
             setControlVisibility(!passwordTextBox.Visible, passwordTextBox, repeatPasswordTextBox, browseImageButton, imageSizeLabel, saveButton, cancelButton);
             HideSettingsMenu();
-        }
-
-        private void deletePasswordButton_Click(object sender, EventArgs e)
-        {
-            // TODO 
-            HideSettingsMenu();
-            deleteLabel.Visible = !deleteLabel.Visible;
         }
 
         private void browseImageButton_Click(object sender, EventArgs e)

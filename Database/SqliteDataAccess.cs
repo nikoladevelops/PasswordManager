@@ -10,6 +10,13 @@ namespace DatabaseModels
 {
     public class SqliteDataAccess
     {
+        public static void DeleteAccountItem (int accountItemId)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute($"delete from AccountItems Where Id=={accountItemId}");
+            }
+        }
         public static AccountItemModel LoadMostRecentAccountItem(AccountModel account)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -36,6 +43,7 @@ namespace DatabaseModels
                 cnn.Execute("insert into AccountItems (Image,ImagePassword,AccountId) values (@Image,@ImagePassword,@AccountId)", accountItems);
             }
         }
+
         public static AccountModel LoadAccount (string username, string password)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
