@@ -10,6 +10,15 @@ namespace DatabaseModels
 {
     public class SqliteDataAccess
     {
+        public static void DeleteAccountForever(int accountId)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute($"delete from AccountItems Where AccountId=={accountId}");
+                cnn.Execute($"delete from Accounts Where Id=={accountId}");
+            }
+        }
+
         public static void DeleteAccountItem (int accountItemId)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -17,6 +26,7 @@ namespace DatabaseModels
                 cnn.Execute($"delete from AccountItems Where Id=={accountItemId}");
             }
         }
+
         public static AccountItemModel LoadMostRecentAccountItem(AccountModel account)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))

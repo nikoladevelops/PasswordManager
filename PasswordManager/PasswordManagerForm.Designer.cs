@@ -163,6 +163,7 @@ namespace PasswordManager
             this.deleteAccountForeverButton.Text = "DELETE ACCOUNT FOREVER";
             this.deleteAccountForeverButton.UseVisualStyleBackColor = true;
             this.deleteAccountForeverButton.Visible = false;
+            this.deleteAccountForeverButton.Click += new System.EventHandler(this.deleteAccountForeverButton_Click);
             // 
             // creditsButton
             // 
@@ -175,6 +176,7 @@ namespace PasswordManager
             this.creditsButton.TabStop = false;
             this.creditsButton.Text = "Credits";
             this.creditsButton.UseVisualStyleBackColor = true;
+            this.creditsButton.Click += new System.EventHandler(this.creditsButton_Click);
             // 
             // imageSizeLabel
             // 

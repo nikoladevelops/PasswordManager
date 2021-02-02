@@ -84,20 +84,22 @@ namespace PasswordManager
 
         private void CustomButton_Click_Delete(object sender, System.EventArgs e)
         {
-            var buttonThatIsClicked = (CustomButton)sender;
-            this.passwordsPanel.Controls.Remove(buttonThatIsClicked);
-            this.customButtons.Remove(buttonThatIsClicked);
+            DialogResult dialogResult = MessageBox.Show("If you click on Yes, this password will be deleted.", "Do you want to delete this password?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                var buttonThatIsClicked = (CustomButton)sender;
+                this.passwordsPanel.Controls.Remove(buttonThatIsClicked);
+                this.customButtons.Remove(buttonThatIsClicked);
+                SqliteDataAccess.DeleteAccountItem(buttonThatIsClicked.Id);
+            }
 
             foreach (var button in customButtons)
             {
                 button.Click -= CustomButton_Click_Delete;
                 button.Click += CustomButton_Click;
             }
-
             deleteLabel.Visible = false;
             isDeletingACustomButtonNow = false;
-            // TODO remove from database as well
-            SqliteDataAccess.DeleteAccountItem(buttonThatIsClicked.Id);
         }
 
         private void deletePasswordButton_Click(object sender, EventArgs e)
@@ -206,6 +208,29 @@ namespace PasswordManager
             VisualizeMostRecentAccountData();
 
             ButtonsResetDefaultProperties();
+        }
+
+        private void deleteAccountForeverButton_Click(object sender, EventArgs e)
+        {
+            HideSettingsMenu();
+
+            DialogResult dialogResult = MessageBox.Show("If you click on Yes, your account will be deleted forever.", "Do you want to delete your account FOREVER ?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                SqliteDataAccess.DeleteAccountForever(account.Id);
+                Application.Exit();
+            }
+        }
+
+        private void creditsButton_Click(object sender, EventArgs e)
+        {
+            HideSettingsMenu();
+
+            DialogResult dialogResult = MessageBox.Show("This application was made by Nikola Petkanski", "Do you want to visit my github page?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                System.Diagnostics.Process.Start("https://github.com/nikoladevelops");
+            }
         }
     }
 }
