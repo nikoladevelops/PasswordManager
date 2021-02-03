@@ -30,20 +30,20 @@ namespace Register
         private void InitializeComponent()
         {
             this.signUpButton = new System.Windows.Forms.Button();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel = new System.Windows.Forms.FlowLayoutPanel();
             this.signInButton = new System.Windows.Forms.Button();
             this.repeatPasswordTextBox = new System.Windows.Forms.TextBox();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.usernameTextBox = new System.Windows.Forms.TextBox();
             this.emailTextBox = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.panel.SuspendLayout();
             this.SuspendLayout();
             // 
             // signUpButton
             // 
             this.signUpButton.BackColor = System.Drawing.Color.LightSalmon;
             this.signUpButton.Font = new System.Drawing.Font("Bahnschrift Condensed", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.signUpButton.Location = new System.Drawing.Point(3, 294);
+            this.signUpButton.Location = new System.Drawing.Point(3, 290);
             this.signUpButton.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
             this.signUpButton.Name = "signUpButton";
             this.signUpButton.Size = new System.Drawing.Size(323, 67);
@@ -53,25 +53,26 @@ namespace Register
             this.signUpButton.UseVisualStyleBackColor = false;
             this.signUpButton.Click += new System.EventHandler(this.signUpButton_Click);
             // 
-            // flowLayoutPanel1
+            // panel
             // 
-            this.flowLayoutPanel1.Controls.Add(this.signInButton);
-            this.flowLayoutPanel1.Controls.Add(this.signUpButton);
-            this.flowLayoutPanel1.Controls.Add(this.repeatPasswordTextBox);
-            this.flowLayoutPanel1.Controls.Add(this.passwordTextBox);
-            this.flowLayoutPanel1.Controls.Add(this.usernameTextBox);
-            this.flowLayoutPanel1.Controls.Add(this.emailTextBox);
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(165, 12);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(331, 412);
-            this.flowLayoutPanel1.TabIndex = 4;
+            this.panel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panel.Controls.Add(this.emailTextBox);
+            this.panel.Controls.Add(this.usernameTextBox);
+            this.panel.Controls.Add(this.passwordTextBox);
+            this.panel.Controls.Add(this.repeatPasswordTextBox);
+            this.panel.Controls.Add(this.signUpButton);
+            this.panel.Controls.Add(this.signInButton);
+            this.panel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.panel.Location = new System.Drawing.Point(119, 4);
+            this.panel.Name = "panel";
+            this.panel.Size = new System.Drawing.Size(331, 412);
+            this.panel.TabIndex = 4;
             // 
             // signInButton
             // 
             this.signInButton.BackColor = System.Drawing.Color.DarkOrange;
             this.signInButton.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.signInButton.Location = new System.Drawing.Point(3, 367);
+            this.signInButton.Location = new System.Drawing.Point(3, 363);
             this.signInButton.Name = "signInButton";
             this.signInButton.Size = new System.Drawing.Size(323, 42);
             this.signInButton.TabIndex = 4;
@@ -84,7 +85,7 @@ namespace Register
             // 
             this.repeatPasswordTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.repeatPasswordTextBox.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.repeatPasswordTextBox.Location = new System.Drawing.Point(3, 225);
+            this.repeatPasswordTextBox.Location = new System.Drawing.Point(3, 221);
             this.repeatPasswordTextBox.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
             this.repeatPasswordTextBox.Name = "repeatPasswordTextBox";
             this.repeatPasswordTextBox.Size = new System.Drawing.Size(323, 46);
@@ -98,7 +99,7 @@ namespace Register
             // 
             this.passwordTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.passwordTextBox.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.passwordTextBox.Location = new System.Drawing.Point(3, 156);
+            this.passwordTextBox.Location = new System.Drawing.Point(3, 152);
             this.passwordTextBox.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.Size = new System.Drawing.Size(323, 46);
@@ -112,7 +113,7 @@ namespace Register
             // 
             this.usernameTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.usernameTextBox.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.usernameTextBox.Location = new System.Drawing.Point(3, 90);
+            this.usernameTextBox.Location = new System.Drawing.Point(3, 86);
             this.usernameTextBox.Margin = new System.Windows.Forms.Padding(3, 20, 3, 0);
             this.usernameTextBox.Name = "usernameTextBox";
             this.usernameTextBox.Size = new System.Drawing.Size(323, 46);
@@ -126,7 +127,7 @@ namespace Register
             // 
             this.emailTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.emailTextBox.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.emailTextBox.Location = new System.Drawing.Point(3, 24);
+            this.emailTextBox.Location = new System.Drawing.Point(3, 20);
             this.emailTextBox.Margin = new System.Windows.Forms.Padding(3, 20, 3, 0);
             this.emailTextBox.Name = "emailTextBox";
             this.emailTextBox.Size = new System.Drawing.Size(323, 46);
@@ -141,20 +142,21 @@ namespace Register
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(707, 425);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.ClientSize = new System.Drawing.Size(584, 433);
+            this.Controls.Add(this.panel);
             this.Name = "SignUpForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sign Up";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
+            this.panel.ResumeLayout(false);
+            this.panel.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
         private System.Windows.Forms.Button signUpButton;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel panel;
         private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.TextBox emailTextBox;
         private System.Windows.Forms.Button signInButton;

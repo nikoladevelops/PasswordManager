@@ -47,6 +47,8 @@ namespace Register
 
             if (isSigningUp)
             {
+                this.Text = "Sign In";
+                panel.Padding = new Padding(0, 66, 0, 0);
                 emailTextBox.Text = null;
                 repeatPasswordTextBox.Text = null;
                 signUpButton.Text = "Sign In";
@@ -58,6 +60,8 @@ namespace Register
             }
             else
             {
+                this.Text = "Sign Up";
+                panel.Padding = new Padding(0, 0, 0, 0);
                 emailTextBox.Text = "Email";
                 repeatPasswordTextBox.Text = "Repeat Password";
                 signUpButton.Text = "Sign Up";
