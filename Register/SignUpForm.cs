@@ -36,6 +36,8 @@ namespace Register
 
         private void signInButton_Click(object sender, EventArgs e)
         {
+            errorLabel.Visible = false;
+
             foreach (var textBox in textBoxes)
             {
                 textBox.Click += onFirstTimeClicked;
@@ -76,6 +78,8 @@ namespace Register
 
         private void signUpButton_Click(object sender, EventArgs e)
         {
+            errorLabel.Visible = false;
+
             var username = usernameTextBox.Text;
             var password = passwordTextBox.Text;
 
@@ -83,33 +87,44 @@ namespace Register
             if (isSigningUp)
             {
                 var email = emailTextBox.Text;
-
-                if (password != repeatPasswordTextBox.Text) 
+                try
                 {
-                    throw new ArgumentException("Passwords don't match");
-                }
-                // TODO - make a TextBoxValidator class, what happens if a texbox is null?
+                    var validator = new TextBoxValidator();
+                    validator.ValidateEmail(email);
+                    validator.ValidateUsername(username);
+                    validator.ValidatePassword(password);
+                    validator.CheckIfPasswordsAreSame(password, repeatPasswordTextBox.Text);
 
-                account.Username = username;
-                account.Email = StringCipher.Encrypt(email, password);
-                account.Password = StringCipher.Encrypt(password, password);
-                SqliteDataAccess.SaveAccount(account);
+                    account.Username = username;
+                    account.Email = StringCipher.Encrypt(email, password);
+                    account.Password = StringCipher.Encrypt(password, password);
+                    SqliteDataAccess.SaveAccount(account);
+                    signInButton.PerformClick();
+                }
+                catch (Exception ex)
+                {
+                    errorLabel.Text = $"ERROR: {ex.Message}";
+                    errorLabel.Visible = true;
+                }
+
             }
             else 
             {
-                var foundAccount = SqliteDataAccess.LoadAccount(username, password);
-                if (foundAccount != null)
+                try
                 {
+                    var foundAccount = SqliteDataAccess.LoadAccount(username, password);
+               
                     var newForm = new PasswordManagerForm(foundAccount,password);
                     this.Visible = false;
                     newForm.ShowDialog();
                     this.Close();
-
                 }
-                else
+                catch (Exception ex)
                 {
-                    emailTextBox.Text = "Errorrr";
+                    errorLabel.Text = $"ERROR: {ex.Message}";
+                    errorLabel.Visible = true;
                 }
+
             }
         }
     }

@@ -31,7 +31,10 @@ namespace DatabaseModels
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<AccountItemModel>($"SELECT * FROM AccountItems WHERE AccountId =={account.Id} ORDER BY Id DESC LIMIT 1;", new DynamicParameters()).ToList().FirstOrDefault();
+                var output = cnn.Query<AccountItemModel>($"SELECT * FROM AccountItems WHERE AccountId =={account.Id} ORDER BY Id DESC LIMIT 1;", new DynamicParameters())
+                    .ToList()
+                    .FirstOrDefault();
+
                 return output;
             }
         }
@@ -40,7 +43,9 @@ namespace DatabaseModels
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<AccountItemModel>($"select * from AccountItems where AccountId=={account.Id}", new DynamicParameters()).ToList();
+                var output = cnn.Query<AccountItemModel>($"select * from AccountItems where AccountId=={account.Id}", new DynamicParameters())
+                    .ToList();
+
                 return output;
             }
         }
@@ -58,9 +63,15 @@ namespace DatabaseModels
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var account = cnn.Query<AccountModel>($"select * from Accounts WHERE Username=='{username}'", new DynamicParameters()).ToList().FirstOrDefault();
-                
+                var account = cnn.Query<AccountModel>($"select * from Accounts WHERE Username=='{username}'", new DynamicParameters())
+                    .ToList()
+                    .FirstOrDefault();
 
+                if (account==null)
+                {
+                    throw new ArgumentException($"Invalid Username or Password");
+                }
+                
                 try
                 {
                     var decryptedEmail = StringCipher.Decrypt(account.Email, password);
@@ -71,7 +82,6 @@ namespace DatabaseModels
                     throw new ArgumentException("Invalid Username or Password");
                 }
                 return account;
-                
             }
         }
 
@@ -79,7 +89,15 @@ namespace DatabaseModels
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-              // TODO check if account already exists!
+                var accountAlreadyExists = cnn.Query<AccountModel>($"select * from Accounts WHERE Username=='{account.Username}'", new DynamicParameters())
+                    .ToList()
+                    .FirstOrDefault() != null;
+
+                if (accountAlreadyExists)
+                {
+                    throw new ArgumentException("Username already exists.");
+                }
+
                 cnn.Execute("insert into Accounts (Username,Email,Password) values (@Username,@Email,@Password)", account);
             }
         }
