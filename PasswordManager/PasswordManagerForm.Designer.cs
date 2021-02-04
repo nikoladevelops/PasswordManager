@@ -43,6 +43,7 @@ namespace PasswordManager
             this.imageSizeLabel = new System.Windows.Forms.Label();
             this.deleteLabel = new System.Windows.Forms.Label();
             this.browseImageButton = new System.Windows.Forms.Button();
+            this.copyEmailButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // passwordsPanel
@@ -74,7 +75,7 @@ namespace PasswordManager
             // passwordTextBox
             // 
             this.passwordTextBox.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passwordTextBox.Location = new System.Drawing.Point(247, 10);
+            this.passwordTextBox.Location = new System.Drawing.Point(258, 10);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.Size = new System.Drawing.Size(124, 27);
             this.passwordTextBox.TabIndex = 4;
@@ -86,7 +87,7 @@ namespace PasswordManager
             // repeatPasswordTextBox
             // 
             this.repeatPasswordTextBox.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.repeatPasswordTextBox.Location = new System.Drawing.Point(373, 10);
+            this.repeatPasswordTextBox.Location = new System.Drawing.Point(384, 10);
             this.repeatPasswordTextBox.Name = "repeatPasswordTextBox";
             this.repeatPasswordTextBox.Size = new System.Drawing.Size(124, 27);
             this.repeatPasswordTextBox.TabIndex = 6;
@@ -130,7 +131,7 @@ namespace PasswordManager
             this.saveButton.BackColor = System.Drawing.Color.LimeGreen;
             this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(604, 10);
+            this.saveButton.Location = new System.Drawing.Point(615, 10);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(62, 28);
             this.saveButton.TabIndex = 9;
@@ -145,7 +146,7 @@ namespace PasswordManager
             this.cancelButton.BackColor = System.Drawing.Color.Firebrick;
             this.cancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancelButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelButton.Location = new System.Drawing.Point(667, 10);
+            this.cancelButton.Location = new System.Drawing.Point(678, 10);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(62, 28);
             this.cancelButton.TabIndex = 10;
@@ -188,7 +189,7 @@ namespace PasswordManager
             // 
             this.imageSizeLabel.AutoSize = true;
             this.imageSizeLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.imageSizeLabel.Location = new System.Drawing.Point(535, 38);
+            this.imageSizeLabel.Location = new System.Drawing.Point(546, 38);
             this.imageSizeLabel.Name = "imageSizeLabel";
             this.imageSizeLabel.Size = new System.Drawing.Size(29, 13);
             this.imageSizeLabel.TabIndex = 14;
@@ -213,7 +214,7 @@ namespace PasswordManager
             this.browseImageButton.BackColor = System.Drawing.Color.LightSalmon;
             this.browseImageButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.browseImageButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.browseImageButton.Location = new System.Drawing.Point(498, 10);
+            this.browseImageButton.Location = new System.Drawing.Point(509, 10);
             this.browseImageButton.Name = "browseImageButton";
             this.browseImageButton.Size = new System.Drawing.Size(105, 28);
             this.browseImageButton.TabIndex = 16;
@@ -223,12 +224,27 @@ namespace PasswordManager
             this.browseImageButton.Visible = false;
             this.browseImageButton.Click += new System.EventHandler(this.browseImageButton_Click);
             // 
+            // copyEmailButton
+            // 
+            this.copyEmailButton.BackColor = System.Drawing.Color.LightSalmon;
+            this.copyEmailButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.copyEmailButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.copyEmailButton.Location = new System.Drawing.Point(167, -1);
+            this.copyEmailButton.Name = "copyEmailButton";
+            this.copyEmailButton.Size = new System.Drawing.Size(84, 24);
+            this.copyEmailButton.TabIndex = 17;
+            this.copyEmailButton.TabStop = false;
+            this.copyEmailButton.Text = "Copy Email";
+            this.copyEmailButton.UseVisualStyleBackColor = false;
+            this.copyEmailButton.Click += new System.EventHandler(this.copyEmailButton_Click);
+            // 
             // PasswordManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.copyEmailButton);
             this.Controls.Add(this.deleteLabel);
             this.Controls.Add(this.browseImageButton);
             this.Controls.Add(this.imageSizeLabel);
@@ -244,6 +260,7 @@ namespace PasswordManager
             this.Controls.Add(this.passwordsPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PasswordManagerForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Password Manager";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Click += new System.EventHandler(this.manager_Clicked);
@@ -266,6 +283,7 @@ namespace PasswordManager
         private System.Windows.Forms.Label imageSizeLabel;
         private System.Windows.Forms.Label deleteLabel;
         private System.Windows.Forms.Button browseImageButton;
+        private System.Windows.Forms.Button copyEmailButton;
     }
 }
 

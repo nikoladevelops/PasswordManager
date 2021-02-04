@@ -82,11 +82,11 @@ namespace Register
 
             var username = usernameTextBox.Text;
             var password = passwordTextBox.Text;
+            var email = emailTextBox.Text;
 
             var account =new AccountModel();
             if (isSigningUp)
             {
-                var email = emailTextBox.Text;
                 try
                 {
                     var validator = new TextBoxValidator();
@@ -106,7 +106,6 @@ namespace Register
                     errorLabel.Text = $"ERROR: {ex.Message}";
                     errorLabel.Visible = true;
                 }
-
             }
             else 
             {
@@ -124,7 +123,6 @@ namespace Register
                     errorLabel.Text = $"ERROR: {ex.Message}";
                     errorLabel.Visible = true;
                 }
-
             }
         }
     }

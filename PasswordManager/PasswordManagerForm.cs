@@ -106,7 +106,7 @@ namespace PasswordManager
         {
             HideSettingsMenu();
 
-            if (!isDeletingACustomButtonNow)
+            if (!isDeletingACustomButtonNow && customButtons.Count != 0)
             {
                 deleteLabel.Visible = !deleteLabel.Visible;
 
@@ -167,7 +167,7 @@ namespace PasswordManager
                 {
                     var image = new Bitmap(dlg.FileName);
 
-                    openDialogImage = BmpToByteArray(image, ImageFormat.Bmp);
+                    openDialogImage = BmpToByteArray(image, ImageFormat.Png);
                 }
             }
         }
@@ -202,6 +202,19 @@ namespace PasswordManager
         private void saveButton_Click(object sender, EventArgs e)
         {
             // TODO Verify password and repeated password
+            if (passwordTextBox.Text==null)
+            {
+
+            }
+            if (passwordTextBox.Text != repeatPasswordTextBox.Text)
+            {
+                throw new ArgumentException("Passwords do not match.");
+            }
+
+            if (openDialogImage == null)
+            {
+                throw new ArgumentException("You haven't selected an image.");
+            }
 
             var encryptedPass = StringCipher.Encrypt(passwordTextBox.Text, this.password);
             SqliteDataAccess.SaveAccountItem(new AccountItemModel() { AccountId = this.account.Id, Image = openDialogImage, ImagePassword = encryptedPass });
@@ -231,6 +244,11 @@ namespace PasswordManager
             {
                 System.Diagnostics.Process.Start("https://github.com/nikoladevelops");
             }
+        }
+
+        private void copyEmailButton_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(StringCipher.Decrypt(account.Email, password));
         }
     }
 }
