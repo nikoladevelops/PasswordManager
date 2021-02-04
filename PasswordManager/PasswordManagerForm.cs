@@ -31,6 +31,12 @@ namespace PasswordManager
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //if (account==null)
+            //{
+            //    MessageBox.Show("Sorry you are not logged in","Error");
+            //    Application.Exit();
+            //}
+
             VisualizeAccountData();
         }
 
@@ -137,12 +143,12 @@ namespace PasswordManager
 
         private void HideSettingsMenu() 
         {
-            setControlVisibility(false, newPasswordButton, deletePasswordButton, deleteAccountForeverButton);
+            setControlVisibility(false, newPasswordButton, deletePasswordButton, deleteAccountForeverButton, clearClipboardButton);
         }
 
         private void settings_Click(object sender, EventArgs e)
         {
-            setControlVisibility(!newPasswordButton.Visible, newPasswordButton, deletePasswordButton, deleteAccountForeverButton);
+            setControlVisibility(!newPasswordButton.Visible, newPasswordButton, deletePasswordButton, deleteAccountForeverButton, clearClipboardButton);
         }
 
         private void manager_Clicked(object sender, EventArgs e)
@@ -202,9 +208,9 @@ namespace PasswordManager
         private void saveButton_Click(object sender, EventArgs e)
         {
             // TODO Verify password and repeated password
-            if (passwordTextBox.Text==null)
+            if (passwordTextBox.Text.Length < 5)
             {
-
+                throw new ArgumentException("Password needs to be at least 5 characters.");
             }
             if (passwordTextBox.Text != repeatPasswordTextBox.Text)
             {
@@ -249,6 +255,20 @@ namespace PasswordManager
         private void copyEmailButton_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(StringCipher.Decrypt(account.Email, password));
+        }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F5)
+                Clipboard.Clear();
+        }
+
+        private void clearClipboardButton_Click(object sender, EventArgs e)
+        {
+            // needs adjustments
+            HideSettingsMenu();
+
+            Clipboard.Clear();
         }
     }
 }

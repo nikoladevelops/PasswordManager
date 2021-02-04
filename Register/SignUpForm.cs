@@ -18,6 +18,7 @@ namespace Register
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //TODO create Accounts.db if it doesn't exist
             textBoxes.AddRange(new TextBox[]
             { 
                 usernameTextBox,

@@ -34,7 +34,6 @@ namespace PasswordManager
             this.settingsButton = new System.Windows.Forms.Button();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.repeatPasswordTextBox = new System.Windows.Forms.TextBox();
-            this.newPasswordButton = new System.Windows.Forms.Button();
             this.deletePasswordButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
@@ -44,6 +43,8 @@ namespace PasswordManager
             this.deleteLabel = new System.Windows.Forms.Label();
             this.browseImageButton = new System.Windows.Forms.Button();
             this.copyEmailButton = new System.Windows.Forms.Button();
+            this.clearClipboardButton = new System.Windows.Forms.Button();
+            this.newPasswordButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // passwordsPanel
@@ -95,21 +96,6 @@ namespace PasswordManager
             this.repeatPasswordTextBox.Text = "Repeat Password";
             this.repeatPasswordTextBox.Visible = false;
             this.repeatPasswordTextBox.Click += new System.EventHandler(this.onFirstTimeClicked);
-            // 
-            // newPasswordButton
-            // 
-            this.newPasswordButton.BackColor = System.Drawing.Color.LightSalmon;
-            this.newPasswordButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.newPasswordButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newPasswordButton.Location = new System.Drawing.Point(-1, 22);
-            this.newPasswordButton.Name = "newPasswordButton";
-            this.newPasswordButton.Size = new System.Drawing.Size(169, 24);
-            this.newPasswordButton.TabIndex = 7;
-            this.newPasswordButton.TabStop = false;
-            this.newPasswordButton.Text = "New Password";
-            this.newPasswordButton.UseVisualStyleBackColor = false;
-            this.newPasswordButton.Visible = false;
-            this.newPasswordButton.Click += new System.EventHandler(this.newPasswordButton_Click);
             // 
             // deletePasswordButton
             // 
@@ -238,12 +224,44 @@ namespace PasswordManager
             this.copyEmailButton.UseVisualStyleBackColor = false;
             this.copyEmailButton.Click += new System.EventHandler(this.copyEmailButton_Click);
             // 
+            // clearClipboardButton
+            // 
+            this.clearClipboardButton.BackColor = System.Drawing.Color.LightSalmon;
+            this.clearClipboardButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.clearClipboardButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clearClipboardButton.Location = new System.Drawing.Point(-1, 91);
+            this.clearClipboardButton.Name = "clearClipboardButton";
+            this.clearClipboardButton.Size = new System.Drawing.Size(169, 24);
+            this.clearClipboardButton.TabIndex = 18;
+            this.clearClipboardButton.TabStop = false;
+            this.clearClipboardButton.Text = "Clear Clipboard (F5)";
+            this.clearClipboardButton.UseVisualStyleBackColor = false;
+            this.clearClipboardButton.Visible = false;
+            this.clearClipboardButton.Click += new System.EventHandler(this.clearClipboardButton_Click);
+            // 
+            // newPasswordButton
+            // 
+            this.newPasswordButton.BackColor = System.Drawing.Color.LightSalmon;
+            this.newPasswordButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.newPasswordButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.newPasswordButton.Location = new System.Drawing.Point(-1, 22);
+            this.newPasswordButton.Name = "newPasswordButton";
+            this.newPasswordButton.Size = new System.Drawing.Size(169, 24);
+            this.newPasswordButton.TabIndex = 19;
+            this.newPasswordButton.TabStop = false;
+            this.newPasswordButton.Text = "New Password";
+            this.newPasswordButton.UseVisualStyleBackColor = false;
+            this.newPasswordButton.Visible = false;
+            this.newPasswordButton.Click += new System.EventHandler(this.newPasswordButton_Click);
+            // 
             // PasswordManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.clearClipboardButton);
+            this.Controls.Add(this.newPasswordButton);
             this.Controls.Add(this.copyEmailButton);
             this.Controls.Add(this.deleteLabel);
             this.Controls.Add(this.browseImageButton);
@@ -253,7 +271,6 @@ namespace PasswordManager
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.deletePasswordButton);
-            this.Controls.Add(this.newPasswordButton);
             this.Controls.Add(this.repeatPasswordTextBox);
             this.Controls.Add(this.passwordTextBox);
             this.Controls.Add(this.settingsButton);
@@ -274,7 +291,6 @@ namespace PasswordManager
         private System.Windows.Forms.Button settingsButton;
         private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.TextBox repeatPasswordTextBox;
-        private System.Windows.Forms.Button newPasswordButton;
         private System.Windows.Forms.Button deletePasswordButton;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button cancelButton;
@@ -284,6 +300,8 @@ namespace PasswordManager
         private System.Windows.Forms.Label deleteLabel;
         private System.Windows.Forms.Button browseImageButton;
         private System.Windows.Forms.Button copyEmailButton;
+        private System.Windows.Forms.Button clearClipboardButton;
+        private System.Windows.Forms.Button newPasswordButton;
     }
 }
 
