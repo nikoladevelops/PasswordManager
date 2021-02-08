@@ -31,6 +31,7 @@ namespace PasswordManager
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.KeyPreview = true;
             //if (account==null)
             //{
             //    MessageBox.Show("Sorry you are not logged in","Error");
@@ -257,18 +258,25 @@ namespace PasswordManager
             Clipboard.SetText(StringCipher.Decrypt(account.Email, password));
         }
 
-        protected override void OnKeyDown(KeyEventArgs e)
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F5)
-                Clipboard.Clear();
+            {
+                clearClipboard();
+            }
+            e.SuppressKeyPress = true;
         }
 
         private void clearClipboardButton_Click(object sender, EventArgs e)
         {
-            // needs adjustments
             HideSettingsMenu();
+            clearClipboard();
+        }
 
+        private void clearClipboard() 
+        {
             Clipboard.Clear();
+            MessageBox.Show("Clipboard cleared.");
         }
     }
 }

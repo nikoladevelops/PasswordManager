@@ -281,6 +281,7 @@ namespace PasswordManager
             this.Text = "Password Manager";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Click += new System.EventHandler(this.manager_Clicked);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
